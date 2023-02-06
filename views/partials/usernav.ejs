@@ -1,0 +1,38 @@
+<header class="header">
+
+    <a href="#" class="logo"> <i class="fas fa-utensils"></i> Tasty Blends </a>
+    
+    <nav class="navbar">
+        <% if (sessionData) {%>
+        <a href="/">home</a>
+        <a href="#about">about</a>
+        <a href="#popular">popular</a>
+        <a href="#menu">menu</a>
+        <a href="#order">order</a>
+        <!-- <div id="search-btn" class="fas fa-search" style="size:40px;"></div> -->
+    </nav>
+
+    <div class="icons">
+        <div id="menu-btn" class="fas fa-bars"></div>
+     <div id="search-btn" class="fas fa-search"></div>
+        <!-- <a href="" onclick="this.href='/productSearch/'+document.getElementById('search-btn').value"></a> -->
+       <a href="/cart"> <div id="cart-btn" class="fas fa-shopping-cart"></div></a>
+        <div id="login-btn"  class="fas fa-user dropdown" data-bs-toggle="dropdown" aria-expanded="false">
+            <ul class="dropdown-content" style="background:rgb(238, 243, 245)">
+              <a href="" onclick="navbarDropdown('/userProfile')" style="background:rgb(238, 243, 245)"><i class="fa fa-user me-2"></i> My profile</a>
+              <a href="" onclick="navbarDropdown('/orderDetails')" style="background:rgb(238, 243, 245)"><i class="fas fa-shopping-cart  me-2"></i>Orders</a>
+              <a href="" onclick="navbarDropdown('/wishlist')" style="background:rgb(238, 243, 245)"> <i class="fas fa-heart  me-2"></i> Wishlist</a>
+              <a href="" onclick="navbarDropdown('/login')" style="background:rgb(238, 243, 245)"><i class="fas fa-sign-out  me-2" ></i>Logout</a>
+            </ul>
+            
+    </div>
+    <% }else{%>
+    <a href="/login"><button class="btn btn-primary text-light  " >Login</button></a>
+    </div>
+    <% } %>
+    <script>
+        function navbarDropdown(url){
+            location.href = url;
+        }
+    </script>
+</header>
