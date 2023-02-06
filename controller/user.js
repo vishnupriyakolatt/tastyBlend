@@ -1180,6 +1180,7 @@ const checkCoupon=  async (req, res) => {
           )
           .then((exist) => {
               console.log(exist);
+              console.log(objId);
               if (!exist.length) {
                   res.json({ invalid: true });
                   console.log("here data is"+data);
