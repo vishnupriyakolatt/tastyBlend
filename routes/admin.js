@@ -46,4 +46,5 @@ router.post('/addBanner', upload.single('image'),  admin.postAddBanner);
 router.get('/deleteBanner/:id',  admin.getDeleteBanner);
 
 
+
 module.exports = router;

@@ -15,9 +15,6 @@ router.post('/login', user.postLogin)
 router.post('/signup', user.postSignup)
 router.post('/otp', user.otpVerification);
 
-
-
-
 router.get('/logout', user.getLogout)
 router.get('/about', user.getabout)
 
@@ -56,7 +53,8 @@ router.get("/orderSuccess",sessionMV.verifyLoginUser, user.orderSuccess );
 router.get("/viewOrderProducts/:id",sessionMV.verifyLoginUser,user.viewOrderProducts);
 router.get("/cancelOrder/:id",sessionMV.verifyLoginUser,user.cancelOrder);
 
-router.get('/categorywise',user.categorywise)
+router.get('/categorywise',sessionMV.verifyLoginUser,user.categorywise)
+router.get('/menu',sessionMV.verifyLoginUser,user.menudetails)
 
 router.get("/forgotpassword",user.forgotpassword)
 router.post('/forgototp', user.forgototp)

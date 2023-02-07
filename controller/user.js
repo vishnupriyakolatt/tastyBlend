@@ -182,7 +182,12 @@ const getError = (req, res) => {
 
 const getabout = (req, res) => {
   try {
-    res.render("user/about");
+    let userSession = req.session.userEmail;
+    res.render("user/about",{
+      sessionData:req.session.userEmail
+    });
+ 
+   
   } catch (error) {
     console.log(error);
     res.redirect("/error");
@@ -839,6 +844,7 @@ const placeOrder = async (req, res) => {
                       if (payment === 'COD') {
                           res.json({ successCod: true });
                       } else if (payment === 'Online') {
+                        // Order.findOneAndUpdate({_id:oid},{$set:{paymentStatus:"paid"}})
                            amount = Math.round(done.finalAmount / 84)
                            req.session.amount=amount
                           console.log(amount);
@@ -1291,10 +1297,36 @@ const forgotpassword=async(req,res)=>{
       console.log(error.message);
     }
   }
+  const menudetails=async(req,res)=>{
+    try {
+      let userSession = req.session.userEmail;
+   
+     
+      await product.find({}, (err, product) => {
+      
+        if (err) {
+          console.log(err);
+        } else {
   
+          res.render("user/menu", {
+            
+            data:product,
+            sessionData: req.session.userEmail,
+           
+          });
+        }
+      });
+      
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  
+
+
   
 module.exports = {
-  getHome,forgotpassword,forgotupdate,forgototpverify,forgototp,checkCoupon,
+  getHome,forgotpassword,forgotupdate,forgototpverify,forgototp,checkCoupon,menudetails,
   cancelOrder,
   otpVerification,
   getUserProfile,

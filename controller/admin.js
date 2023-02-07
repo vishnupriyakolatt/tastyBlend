@@ -643,6 +643,130 @@ const deleteCoupon = (req, res) => {
   });
 };
 
+//..............................menuproduct
+
+const menugetAddProduct = async (req, res) => {
+  try {
+    Category.find({}, (err, categorydetails) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.render("admin/menuaddProduct", { user: categorydetails });
+      }
+    });
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+const menuinsertProduct = async (req, res) => {
+  try {
+    const image = [req.files[0], req.files[1], req.files[2], req.files[3]];
+    console.log(image);
+    
+    let product = new Product({
+      name: req.body.name,
+      description: req.body.description,
+      category: req.body.category,
+      image: req.files,
+
+      price: req.body.price,
+      quantity: req.body.quantity,
+    });
+    console.log(req.files);
+    await product.save();
+    res.redirect("/admin/menuproduct");
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+const menugetProduct = async (req, res) => {
+  try {
+    Product.find({}, (err, productDetails) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.render("admin/menuproduct", { details: productDetails });
+      }
+    });
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+
+const menustatusProduct = async (req, res) => {
+  try {
+    const check = await Product.findById({ _id: req.query.id });
+
+    if (check.status == true) {
+      await Product.findByIdAndUpdate(
+        { _id: req.query.id },
+        { $set: { status: false } }
+      );
+      console.log(check.status);
+    } else {
+      await Product.findByIdAndUpdate(
+        { _id: req.query.id },
+        { $set: { status: true } }
+      );
+      console.log(check.status);
+    }
+    res.redirect("/admin/menuproduct");
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+const menueditProduct = async (req, res) => {
+  try {
+    const id = req.query.id;
+
+    const product = await Product.findOne({ _id: id });
+    const categoryDetails = await Category.find();
+    if (product) {
+      res.render("admin/menueditProduct", { product, category: categoryDetails });
+    } else {
+      res.redirect("/admin/menuproduct");
+    }
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+const menuupdateProduct = async (req, res) => {
+  console.log(req.files);
+  if (req.files[0]) {
+    console.log("with images");
+    await Product.findByIdAndUpdate(
+      { _id: req.query.id },
+      {
+        $set: {
+          name: req.body.name,
+          description: req.body.description,
+          category: req.body.category,
+          image: req.files,
+          price: req.body.price,
+          quantity: req.body.quantity,
+          color: req.body.color,
+        },
+      }
+    );
+  } else {
+    console.log("no image");
+    await Product.findByIdAndUpdate(
+      { _id: req.query.id },
+      {
+        $set: {
+          name: req.body.name,
+          description: req.body.description,
+          category: req.body.category,
+          price: req.body.price,
+          quantity: req.body.quantity,
+          color: req.body.color,
+        },
+      }
+    );
+  }
+  res.redirect("/admin/menuproduct");
+};
+
 module.exports = {
   loginpage,
   adminhome,
