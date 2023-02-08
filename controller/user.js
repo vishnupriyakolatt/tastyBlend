@@ -829,7 +829,7 @@ const placeOrder = async (req, res) => {
                   products: cartData.product,
                   discount: dis,
                   totalAmount: sumTotal,
-                  finalAmount: sumTotal+30,
+                  finalAmount: sumTotal,
                   paymentMethod: payment,
                  
               });
@@ -844,7 +844,7 @@ const placeOrder = async (req, res) => {
                       if (payment === 'COD') {
                           res.json({ successCod: true });
                       } else if (payment === 'Online') {
-                        // Order.findOneAndUpdate({_id:oid},{$set:{paymentStatus:"paid"}})
+                       Order.findOneAndUpdate({_id:oid},{$set:{paymentStatus:"paid"}})
                            amount = Math.round(done.finalAmount / 84)
                            req.session.amount=amount
                           console.log(amount);
@@ -1039,6 +1039,8 @@ const viewOrderProducts = async (req, res) => {
 
           productItem: "$products.productId",
           productQuantity: "$products.quantity",
+         
+            price:"$products.price",
           discount: "$discount",
         },
       },
@@ -1058,11 +1060,13 @@ const viewOrderProducts = async (req, res) => {
           orderStatus:1,
           productItem: 1,
           productQuantity: 1,
+          price:1,
           discount: 1,
           productDetail: { $arrayElemAt: ["$productDetail", 0] },
         },
       },
     ]).then((productData) => {
+      console.log(productData)
       const addId = productData[0].address;
       Address.find({ _id: addId }).then((address) => {
         console.log(address);
@@ -1323,10 +1327,45 @@ const forgotpassword=async(req,res)=>{
   };
   
 
+  async function productSearch(req, res) {
 
+    let searchresult = req.body.searchtext
+    console.log("search:" + searchresult);
+    await Product.find({name:{$regex:new RegExp(searchresult,'i')}})
+    .then((result)=>{
+res.render('user/menu', {
+        sessionData: req.session.userEmail,
+        data: result,
+        
+    })
+
+    })
+    // let productdata = await Product.find({
+    //     $or: [
+    //         {
+    //             item_name: {
+    //                 $regex: new RegExp(searchresult),
+    //                 $options: 'i'
+    //             }
+    //         }, {
+    //             categoryName: {
+    //                 $regex: new RegExp(searchresult),
+    //                 $options: 'i'
+    //             }
+    //         }
+    //     ]
+    // })
+    // let productdata=await Product.find({})
+   
+    
+
+    
+
+
+}
   
 module.exports = {
-  getHome,forgotpassword,forgotupdate,forgototpverify,forgototp,checkCoupon,menudetails,
+  getHome,forgotpassword,forgotupdate,forgototpverify,forgototp,checkCoupon,menudetails,productSearch,
   cancelOrder,
   otpVerification,
   getUserProfile,

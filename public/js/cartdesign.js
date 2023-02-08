@@ -176,7 +176,7 @@ function addToCartWish(proId) {
 function removeWishlistProduct(wishlistId, productId) {
   $.ajax({
     url: "/removewishlistProduct",
-    method: "post",
+    method: "delete",
     data: {
       wishlistId,
       productId,

@@ -60,14 +60,7 @@
 
 <!-- search-form  -->
 
-<section class="search-form-container">
 
-    <form action="">
-        <input type="search" name="" placeholder="search here..." id="search-box">
-        <label for="search-box" class="fas fa-search"></label>
-    </form>
-
-</section>
 
 <!-- shopping-cart section  -->
 
@@ -84,7 +77,7 @@
         <span>welcome foodies</span>
         <h3>different spices for the different tastes 😋</h3>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis unde dolores temporibus hic quam debitis tenetur harum nemo.</p>
-        <a href="#" class="btn">order now</a>
+        <a href="/menu" class="btn">order now</a>
     </div>
 
     <div class="image">
@@ -102,7 +95,7 @@
    <% for(let i=0;i<cat.length;i++){%>
         
         <a href="/categorywise?catname=<%=cat[i].name%>" class="box">
-            <img src="/image/<%=cat[i].image%>" width="100px;" height="100px;" alt="">
+            <img src="/image/<%=cat[i].image%>" width="100px;" height="100px;" alt=""class="image-fluid rounded">
             <h3><%=cat[i].name%></h3>
         </a>
    <% }%>
@@ -167,7 +160,7 @@
             <!-- <span class="text-danger" id="<%= product._id %>"></span>
             <button  onclick="addToWishlist('<%= product._id %>')"><a href=""  class="fas fa-heart"style="color:darkred;"></a></button> -->
             <div class="image">
-                <img src="/image/<%= product?.image[0]?.filename %>" alt="">
+                <img src="/image/<%= product?.image[0]?.filename %>" alt="" class="image-fluid rounded">
             </div>
             <div class="content">
                 <h3> <%=product.name%></h3>
@@ -192,7 +185,7 @@
             <span>double cheese</span>
             <h3>burger</h3>
             <p>with cococola and fries</p>
-            <a href="#" class="btn">order now</a>
+            <a href="/menu" class="btn">order now</a>
         </div>
     </div>
     <div class="grid-banner d-md-flex">
@@ -203,7 +196,7 @@
             <div class="content">
                 <span style="color:lightblue">special offer</span>
                 <h3 style="color:lightblue"><%=bann.text%></h3>
-                <a href="#" class="btn">order now</a>
+                <a href="/menu" class="btn">order now</a>
             </div>
            
         </div>

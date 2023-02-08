@@ -64,14 +64,7 @@
 
 <!-- search-form  -->
 
-<section class="search-form-container">
 
-    <form action="">
-        <input type="search" name="" placeholder="search here..." id="search-box">
-        <label for="search-box" class="fas fa-search"></label>
-    </form>
-
-</section>
 
 <!-- shopping-cart section  -->
 
@@ -103,6 +96,7 @@
 
 <!-- popular section starts  -->
 <!-- .................................................................................................................................. -->
+<div style="margin-top: 80px;;">
 <% if(cart.length===0){ %>
   <center class="col-xl-12 col-md-6 col-sm-4 pt-5">
     <h1 style="color: red">Sorry your cart is empty</h1>
@@ -120,6 +114,7 @@
     >
   </center>
   <% }else{ %>
+  </div>
 <section class=" ">
   <div class="container py-5 ">
     <div class="row d-flex justify-content-center align-items-center ">

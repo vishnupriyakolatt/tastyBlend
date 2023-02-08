@@ -30,6 +30,18 @@
         <a href="/login"><button class="btn btn-primary text-light" >Login</button></a>
         </div>
         <% } %>
+
+        <section class="search-form-container">
+
+            <form action='/productsearch' method="post">
+                <input type="search" name="searchtext" placeholder="search here..." id="search-box">
+                <button type="submit">
+                <label for="search-box" class="fas fa-search"></label>
+
+                </button>
+            </form>
+        
+        </section>
  
     <script>
         function navbarDropdown(url){

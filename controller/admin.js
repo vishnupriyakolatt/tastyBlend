@@ -105,12 +105,14 @@ const adminhome = async (req, res) => {
 function homelogin(req, res) {
   let adminEmail = "admin@gmail.com";
   let adminpassword = "1234";
+  req.session.adminId=adminEmail;
   if (req.body.email === adminEmail && req.body.password === adminpassword) {
     res.redirect("/admin/home");
   } else {
     res.render("admin/adminlogin", { wrong: "invalid Username or Password" });
   }
 }
+
 
 function adminlogout(req, res) {
   res.redirect("/admin");
@@ -161,27 +163,29 @@ const getAddCategory = (req, res) => {
 };
 const insertCategory = async (req, res) => {
   try {
-    const categoryData = req.body.name.toLowerCase();
+    // const categoryData = req.body.name.toUpperCase();
     const allCategories = await Category.find();
-    const verify = await Category.findOne({ name: categoryData });
+    const verify = await Category.findOne({name:{$regex:new RegExp(req.body.name,'i')}});
     // let category = new Category({
     //     name: req.body.name,
     //     image: req.file.filename,
     // })
     // category.save();
     // res.redirect('/admin/category');
-    if (verify == null) {
+    if (verify) {
+      res.render("admin/addCategory", {
+        wrong: "category already exists",
+        allCategories,
+      });
+
+      
+    } else {
       const newCategory = new Category({
         name: req.body.name,
         image: req.file.filename,
       });
       newCategory.save().then(() => {
         res.redirect("/admin/category");
-      });
-    } else {
-      res.render("admin/addCategory", {
-        wrong: "category already exists",
-        allCategories,
       });
     }
   } catch (error) {
@@ -229,23 +233,26 @@ const editCategory = async (req, res) => {
   }
 };
 const updateCategory = async (req, res) => {
+  const details=req.body
+  Id=details.categoryId
+
   try {
-    const check = await Category.findById({ _id: req.query.id });
+    const check = await Category.findById({ _id:Id  });
 
     if (check.status == true) {
       await Category.findByIdAndUpdate(
-        { _id: req.query.id },
+        { _id: Id },
         { $set: { status: false } }
       );
-      console.log(check.status);
+      res.json({ok:true})
     } else {
       await Category.findByIdAndUpdate(
-        { _id: req.query.id },
+        { _id: Id },
         { $set: { status: true } }
       );
-      console.log(check.status);
+     res.json({update:true})
     }
-    res.redirect("/admin/category");
+    
   } catch (error) {
     console.log(error.message);
   }

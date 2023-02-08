@@ -1,5 +1,5 @@
 const User = require("../model/user/userdetail");
-const verifyLoginAdmin = function (req, res) {
+const verifyLoginAdmin = function (req, res,next) {
   if (req.session.adminId) {
     next();
   } else {

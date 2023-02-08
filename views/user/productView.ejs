@@ -74,14 +74,7 @@ text-decoration: none;
 
 <!-- search-form  -->
 
-<section class="search-form-container">
 
-    <form action="">
-        <input type="search" name="" placeholder="search here..." id="search-box">
-        <label for="search-box" class="fas fa-search"></label>
-    </form>
-
-</section>
 
 <!-- shopping-cart section  -->
 
@@ -118,24 +111,24 @@ text-decoration: none;
     <div class = "product-imgs">
       <div class = "img-display">
         <div class = "img-showcase">
-          <img src = "/image/<%=product?.image[0]?.filename%>" id="MainImage" alt = "bridal image">
+          <img src = "/image/<%=product?.image[0]?.filename%>" id="MainImage" alt = "bridal image" class="image-fluid rounded">
          
         </div>
       </div>
       <div class = "img-select">
         <div class = "img-item">
           <a href = "#" data-id = "1">
-            <img src = "/image/<%=product?.image[0]?.filename%>" alt = "bridal image">
+            <img src = "/image/<%=product?.image[0]?.filename%>" alt = "bridal image" class="image-fluid rounded">
           </a>
         </div>
         <div class = "img-item">
           <a href = "#" data-id = "2">
-            <img src = "/image/<%=product?.image[1]?.filename%>" alt = "bridal image">
+            <img src = "/image/<%=product?.image[1]?.filename%>" alt = "bridal image" class="image-fluid rounded">
           </a>
         </div>
         <div class = "img-item">
           <a href = "#" data-id = "3">
-            <img src = "/image/<%=product?.image[2]?.filename%>"  alt = "bridal image">
+            <img src = "/image/<%=product?.image[2]?.filename%>"  alt = "bridal image" class="image-fluid rounded">
           </a>
         </div>
        
@@ -148,19 +141,18 @@ text-decoration: none;
       
 
       <div class = "product-price">
-        <p class = "last-price">MRP: <span><%=product.price%></span></p>
-        <p class = "new-price">Price: <span>$<%=product.price-((product.price)*5)/100%> (5% off)</span></p>
+        <h4 style="color:red;">MRP: <span>Rs: <%=product.price%>.00</span></h4>
+  
       </div>
 
       <div class = "product-detail">
         <h2>about this item: </h2>
-        <p><%=product.details%></p>
+        <h4><%=product.details%></h4>
       
         <ul>
-          <li>Available: <span>in stock</span></li>
-          <li>Category: <span></span><%=product.category%></li>
-          <li>Shipping Area: <span>All over the world</span></li>
-          <li>Shipping Fee: <span>$20</span></li>
+          <li style="font-size: 14px;">Available: <span>in stock</span></li>
+          <li style="font-size: 14px;">Category: <span></span><%=product.category%></li>
+          <li style="font-size: 14px;">Shipping Fee: <span>Free</span></li>
         </ul>
       </div>
 

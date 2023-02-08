@@ -38,7 +38,7 @@ router.post('/changeQuantity', sessionMV.verifyLoginUser, user.changeQuantity)
 
 router.get('/wishlist', sessionMV.verifyLoginUser, user.getWishlist)
 router.get("/addToWishlist/:id", sessionMV.verifyLoginUser, user.addToWishlist);
-router.post("/removewishlistProduct",sessionMV.verifyLoginUser,user.removewishlistProduct);
+router.delete("/removewishlistProduct",sessionMV.verifyLoginUser,user.removewishlistProduct);
 
 
 router.get('/checkout', sessionMV.verifyLoginUser, user.getCheckout)
@@ -61,5 +61,5 @@ router.post('/forgototp', user.forgototp)
 router.post('/forgototpverify', user.forgototpverify)
 router.post('/forgotupdate', user.forgotupdate)
 
-
+router.post("/productsearch",user.productSearch)
 module.exports = router;

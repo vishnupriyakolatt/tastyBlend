@@ -22,7 +22,7 @@
           <div class="row d-flex justify-content-center align-items-center h-100">
             <div class="col col-xl-10">
               <div class="card" style="border-radius: 1rem;">
-                <div class="row g-0">
+                <div class="row g-0"style=margin-top:30px;>
                   <div class="col-md-6 col-lg-5 d-none d-md-block">
                     <img src="/image/about.jpg"
                     alt="login form" class="img-fluid" style="height:750px;width: 550px;" />
@@ -37,7 +37,11 @@
                           <i class="fas fa-cubes fa-2x me-3" style="color: #ff6219;"></i>
                           <span class="h1 fw-bold mb-0">Tasty Blends</span>
                         </div>
-      
+                        <%if(locals.wrong2){%>
+                          <div class="alert alert-danger" role="alert">
+                            <%=locals.wrong2%>
+                          </div>
+                          <%}%>
                         <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Register Here</h5>
       
                         <div class="form-outline mb-4">
